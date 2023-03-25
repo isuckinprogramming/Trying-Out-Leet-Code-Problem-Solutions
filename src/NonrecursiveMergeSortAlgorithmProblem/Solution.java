@@ -1,14 +1,6 @@
 package NonrecursiveMergeSortAlgorithmProblem;
 
-
-import com.sun.source.tree.LiteralTree;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-
-import java.awt.image.AreaAveragingScaleFilter;
 import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
 
 import static NonrecursiveMergeSortAlgorithmProblem.MergeSortAlgorithm.mergeSortRecursionImplementationMosh;
 
@@ -89,6 +81,34 @@ import static NonrecursiveMergeSortAlgorithmProblem.MergeSortAlgorithm.mergeSort
 
   }
 
+  /*
+  * Class with Solution to make problem in Leet Code.
+  *
+  * The input is about receiving an array of singly linkedlist,
+  * and producing an Output of a sorted singly linkedlist.
+  *
+  * As per the description of the problem.
+  *
+  * Input: lists = [[1,4,5],[1,3,4],[2,6]]
+  * Output: [1,1,2,3,4,4,5,6]
+  * Explanation: The linked-lists are:
+  *  [
+  *     1->4->5,
+  *     1->3->4,
+  *      2->6
+  * ]
+  *  merging them into one sorted list:
+  * 1->1->2->3->4->4->5->6
+  *
+  *
+  * A recursive implementation of the merge-sort algorithm have the
+  * risk of throwing a StackOverFlow error. An Exception can be handled
+  * during runtime, I don't know how to handle an Error during runtime, a
+  * try and catch block is used for handling Exceptions.
+  *
+  * Haven't tried handling Errors during runtime.
+  *
+  * */
   public class Solution {
 
 
@@ -96,6 +116,14 @@ import static NonrecursiveMergeSortAlgorithmProblem.MergeSortAlgorithm.mergeSort
      *
      * Main method is used to test if the mergeKList method works as
      * intended.
+     *
+     * I am having a problem with implementing a loop
+     * to automatically create a ListNode with contents loaded
+     * already.
+     *
+     * So I am chose to repetively make nodes and add them
+     * to the tail.
+     *
      * */
       public static void main(String[] args) {
 
