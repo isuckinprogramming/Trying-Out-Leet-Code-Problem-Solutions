@@ -2,9 +2,11 @@ package NonrecursiveMergeSortAlgorithmProblem;
 
 import java.util.ArrayList;
 
-import static NonrecursiveMergeSortAlgorithmProblem.MergeSortAlgorithm.mergeSortRecursionImplementationMosh;
-
-//  Definition for singly-linked list.
+/*
+*
+* The ListNode class is an implementation of singly-LinkedList.
+*
+* */
  class ListNode {
       int val;
       ListNode next;
@@ -21,10 +23,22 @@ import static NonrecursiveMergeSortAlgorithmProblem.MergeSortAlgorithm.mergeSort
 
       }
 
+      /*
+      *
+      * Create a ListNode with a data.
+      *
+      * */
       ListNode(int val) {
           this.val = val;
       }
 
+
+      /*
+      * Create a ListNode with a Data and
+      * a tail ListNode.
+      *
+      *
+      * */
       ListNode(int val, ListNode next) {
           this.val = val; this.next = next;
       }
@@ -47,9 +61,15 @@ import static NonrecursiveMergeSortAlgorithmProblem.MergeSortAlgorithm.mergeSort
       }
 
 
+      /*
+      *
+      * returns a boolean value according to whether or not
+      * there is a next ListNode
+      * */
       public boolean hasNext(){
           return  ! ( next == null);
       }
+
 
       /*
       * Accepts a ListNode, though it takes the value of the ListNode
@@ -112,19 +132,19 @@ import static NonrecursiveMergeSortAlgorithmProblem.MergeSortAlgorithm.mergeSort
   public class Solution {
 
 
-     /*
-     *
-     * Main method is used to test if the mergeKList method works as
-     * intended.
-     *
-     * I am having a problem with implementing a loop
-     * to automatically create a ListNode with contents loaded
-     * already.
-     *
-     * So I am chose to repetively make nodes and add them
-     * to the tail.
-     *
-     * */
+      /*
+       *
+       * Main method is used to test if the mergeKList method works as
+       * intended.
+       *
+       * I am having a problem with implementing a loop
+       * to automatically create a ListNode with contents loaded
+       * already.
+       *
+       * So I am chose to repetively make nodes and add them
+       * to the tail.
+       *
+       * */
       public static void main(String[] args) {
 
           ListNode testNodeOne = new ListNode(123);
@@ -158,7 +178,8 @@ import static NonrecursiveMergeSortAlgorithmProblem.MergeSortAlgorithm.mergeSort
           ListNode[] toSort = { testNodeOne, testNodeTwo };
 
           System.out.println(
-          "Previous Unsorted: \nTest Node #1: " + getStringContentOfListNode(testNodeOne)  + "\nTest Node #2: " + getStringContentOfListNode( testNodeTwo ));
+          "Previous Unsorted: \nTest Node #1: " + getStringContentOfListNode(testNodeOne)
+          + "\nTest Node #2: " + getStringContentOfListNode( testNodeTwo ));
 
 
           ListNode mergedList  = mergeKLists( toSort );
@@ -167,6 +188,13 @@ import static NonrecursiveMergeSortAlgorithmProblem.MergeSortAlgorithm.mergeSort
 
       }
 
+
+      /*
+      *
+      * Convert a ListNode into a String, the String contains all contents
+      * of the ListNode, From Head to Tail.
+      *
+      * */
       private static String getStringContentOfListNode( ListNode ListNodeToPrint ){
 
           ListNode nodeInUseForPrinting = ListNodeToPrint;
@@ -179,6 +207,7 @@ import static NonrecursiveMergeSortAlgorithmProblem.MergeSortAlgorithm.mergeSort
 
               nodeInUseForPrinting = nodeInUseForPrinting.next;
           }
+
           return listOfContents;
       }
 
@@ -197,7 +226,7 @@ import static NonrecursiveMergeSortAlgorithmProblem.MergeSortAlgorithm.mergeSort
           for(  ListNode nodeInside : lists ){
 
               for( Integer dataInside: nodeInside.getAllDataAndPutInsideArrayList() )
-              valueOfAllNumbers.add(dataInside);
+              valueOfAllNumbers.add( dataInside );
           }
 
           Object[] dataOfAllValues = valueOfAllNumbers.toArray();
@@ -205,14 +234,20 @@ import static NonrecursiveMergeSortAlgorithmProblem.MergeSortAlgorithm.mergeSort
           Integer[] valuesToSort = new Integer[dataOfAllValues.length];
 
           for( int i = 0; i < dataOfAllValues.length; i++)
-              valuesToSort[i] = (Integer) dataOfAllValues[i];
+              valuesToSort[i] = ( Integer ) dataOfAllValues[i];
 
           mergeSortRecursionImplementationMosh( valuesToSort );
           return createNodesWithData( valuesToSort );
       }
 
 
-
+      /*
+      *
+      * Accepts an Array of Integer to serve as the data for creating
+      * a ListNode with Tails ListNodes. The data that the ListNode
+      * contains is the same data that the Passed Array Contains.
+      *
+      * */
       private static ListNode createNodesWithData( Integer[] valuesForNodes  ) {
 
           int lengthOfValuesToAdd = valuesForNodes.length;
@@ -233,6 +268,97 @@ import static NonrecursiveMergeSortAlgorithmProblem.MergeSortAlgorithm.mergeSort
           return permanentHeadNode;
       }
 
+
+      public static void  mergeSortRecursionImplementationMosh(
+              Integer[] inputArray
+      ) {
+
+          int arrayLength = inputArray.length;
+
+          if( arrayLength < 2 ){
+
+              return;
+          }
+
+          int middleIndex = arrayLength / 2;
+
+          Integer[] leftSideArray = new Integer[middleIndex];
+
+
+          Integer[] rightSideArray = new Integer[arrayLength - middleIndex];
+
+
+          for( int i = 0; i < middleIndex; i++ ){
+
+              leftSideArray[i] = inputArray[i];
+          }
+
+          for( int i = middleIndex; i < arrayLength; i++ ){
+
+              rightSideArray[ i - middleIndex ] = inputArray[ i ];
+          }
+
+          //call this method again to
+          mergeSortRecursionImplementationMosh( leftSideArray );
+
+          mergeSortRecursionImplementationMosh( rightSideArray );
+
+          arrayMerger( inputArray,leftSideArray, rightSideArray);
+
+      }
+
+      private static void arrayMerger( Integer[] inputArray, Integer[] leftArray, Integer[] rightArray ){
+
+          int leftSize = leftArray.length;
+          int rightSize = rightArray.length;
+
+
+          int leftIterator = 0;
+          int rightIterator = 0;
+          int loopIterator = 0;
+
+
+          while( leftIterator <  leftSize && rightIterator < rightSize  ){
+
+
+              if(  leftArray[leftIterator] <= rightArray[rightIterator] ){
+
+                  inputArray[loopIterator] = leftArray[leftIterator];
+
+                  leftIterator++;
+                  loopIterator++;
+
+                  continue;
+              }
+
+              inputArray[loopIterator] = rightArray[rightIterator];
+
+              rightIterator++;
+              loopIterator++;
+
+          }
+
+          while (
+                  leftIterator < leftSize ||
+                          rightIterator < rightSize
+          ){
+
+              if ( leftIterator < leftSize ){
+
+                  inputArray[loopIterator] = leftArray[leftIterator];
+
+                  loopIterator++;
+                  leftIterator++;
+
+                  continue;
+              }
+
+              inputArray[loopIterator] = rightArray[rightIterator];
+
+              rightIterator++;
+              loopIterator++;
+          }
+      }
 
 
 
