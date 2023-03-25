@@ -1,10 +1,10 @@
-package SortingAlgorithmsPractice;
+package NonrecursiveMergeSortAlgorithmProblem;
 
 public class MergeSortAlgorithm {
 
     public static void main(String [] args){
 
-        int[] testArray = {13,144,56,7,8,9,905,567,35};
+        Integer[] testArray = {13,144,56,7,8,9,905,567,35};
 
         String message = "original : " + convertArrayToString(testArray);
 
@@ -12,13 +12,11 @@ public class MergeSortAlgorithm {
 
         message += "\nSorted : " + convertArrayToString(testArray);
 
-        System.out.println(
-                message
-        );
-
-
+        System.out.println( message );
     }
-    public static String convertArrayToString(int[] numberContainer ){
+
+
+    public static String convertArrayToString(Integer[] numberContainer ){
 
         String contents = "";
         for( int numInside: numberContainer )  {
@@ -28,94 +26,8 @@ public class MergeSortAlgorithm {
     }
 
 
-
-    public static void mergeSortAlgorithm( int[] numberContainer ){
-
-
-        int low = 0;
-        int high = numberContainer.length - 1;
-        int middle = numberContainer.length / 2;
-
-        int[] leftSideArray = new int[ middle ];
-
-        int[] rightSideArray = new int[ middle - 1 ];
-
-
-        arrayDivider(
-        leftSideArray, numberContainer, 0, middle  );
-
-
-        arrayDivider(
-        rightSideArray, numberContainer,
-    middle + 1, numberContainer.length - 1
-        );
-
-
-    }
-//
-//    private static int[] getLeftSideArray( int[] numberContainer ){
-//
-//        int startIndex = 0;
-//
-//        int middleIndex = numberContainer.length / 2;
-//
-//        int[] rightSideArray = new int[ middleIndex ];
-//
-//        int[] leftSideArray = new int[ middleIndex - 1 ];
-//
-//
-//        if ( numberContainer[middleIndex] < numberContainer[ middleIndex - 1 ] ){
-//
-//            for( int i = 0; i < middleIndex; i++){
-//
-//                rightSideArray[i] = numberContainer[ middleIndex + i ];
-//
-//
-//
-//            }
-//
-//        }
-//
-//
-//
-//    }
-
-    private static void arrayDivider(
-        int[] arrayToBeDivided, int[] arrayDestination, int start, int end ) {
-
-        for ( int i = 0; i < end; i++ ){
-
-            if ( i == 0 ) {
-
-                arrayDestination[ i ] = arrayToBeDivided[i + start];
-                continue;
-            }
-
-//          arrayDestination[ i - 1 ] < arrayToBeDivided[ i + start ];
-
-            if( arrayDestination[ i - 1 ] < arrayToBeDivided[ i + start ] ){
-
-                arrayDestination[ i ] = arrayToBeDivided[ i + start ];
-
-                continue;
-            }
-
-
-            int temp = arrayDestination[i - 1];
-
-            arrayDestination[ i - 1 ] = arrayToBeDivided[ i + start ];
-
-            arrayDestination[i] = temp;
-        }
-    }
-
-    private static void arrayMerger(){
-
-    }
-
-
     public static void  mergeSortRecursionImplementationMosh(
-        int[] inputArray
+       Integer[] inputArray
         ) {
 
         int arrayLength = inputArray.length;
@@ -127,9 +39,10 @@ public class MergeSortAlgorithm {
 
         int middleIndex = arrayLength / 2;
 
-        int[] leftSideArray = new int[middleIndex];
+        Integer[] leftSideArray = new Integer[middleIndex];
 
-        int[] rightSideArray = new int[ arrayLength - middleIndex ];
+
+        Integer[] rightSideArray = new Integer[arrayLength - middleIndex];
 
 
         for( int i = 0; i < middleIndex; i++ ){
@@ -151,7 +64,7 @@ public class MergeSortAlgorithm {
 
     }
 
-    private static void arrayMerger( int[] inputArray, int[] leftArray, int[] rightArray ){
+    private static void arrayMerger( Integer[] inputArray, Integer[] leftArray, Integer[] rightArray ){
 
         int leftSize = leftArray.length;
         int rightSize = rightArray.length;
@@ -182,10 +95,8 @@ public class MergeSortAlgorithm {
 
         }
 
-
-
         while (
-                leftIterator < leftSize ||
+            leftIterator < leftSize ||
             rightIterator < rightSize
         ){
 
