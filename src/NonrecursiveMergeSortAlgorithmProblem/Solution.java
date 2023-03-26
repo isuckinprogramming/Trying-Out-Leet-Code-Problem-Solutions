@@ -156,31 +156,31 @@ import java.util.ArrayList;
        * */
       public static void main(String[] args) {
 
-          ListNode testNodeOne = new ListNode(123);
+          ListNode testNodeOne = new ListNode();
+//
+//          ListNode nodeA = new ListNode(12);
+//
+//          testNodeOne.next = nodeA;
+//
+//          ListNode nodeB = new ListNode(234);
+//
+//          nodeA.next = nodeB;
+//
+//          ListNode nodeC = new ListNode(567);
+//
+//          nodeB.next = nodeC;
+//
+//          ListNode nodeD = new ListNode(5);
+//
+//          nodeC.next = nodeD;
+//
+//          ListNode nodeE = new ListNode(5);
+//
+//          nodeD.next = nodeE;
 
-          ListNode nodeA = new ListNode(12);
-
-          testNodeOne.next = nodeA;
-
-          ListNode nodeB = new ListNode(234);
-
-          nodeA.next = nodeB;
-
-          ListNode nodeC = new ListNode(567);
-
-          nodeB.next = nodeC;
-
-          ListNode nodeD = new ListNode(5);
-
-          nodeC.next = nodeD;
-
-          ListNode nodeE = new ListNode(5);
-
-          nodeD.next = nodeE;
 
 
-
-          ListNode testNodeTwo = new ListNode(1311);
+          ListNode testNodeTwo = new ListNode();
 
 
 
@@ -223,6 +223,10 @@ import java.util.ArrayList;
 //          ListNode nodeInCurrentAdd = listNodeWithData;
           while( listNodeWithData != null ) {
 
+              if(listNodeWithData.val == 0){
+                  listNodeWithData = listNodeWithData.next;
+                  continue;
+              }
               container.add(listNodeWithData.val );
               listNodeWithData = listNodeWithData.next;
           }
@@ -245,6 +249,10 @@ import java.util.ArrayList;
           String listOfContents = "";
 
           while( nodeInUseForPrinting  != null){
+//
+//              if (){
+//
+//              }
 
               listOfContents += nodeInUseForPrinting.val + ", " ;
 
@@ -280,7 +288,15 @@ import java.util.ArrayList;
               valuesToSort[i] = ( Integer ) dataOfAllValues[i];
 
           mergeSortRecursionImplementationMosh( valuesToSort );
-          return createNodesWithData( valuesToSort );
+
+          try{
+
+              return createNodesWithData( valuesToSort );
+
+          }catch (Exception exception){
+
+              return null;
+          }
       }
 
 
@@ -291,9 +307,14 @@ import java.util.ArrayList;
       * contains is the same data that the Passed Array Contains.
       *
       * */
-      private ListNode createNodesWithData( Integer[] valuesForNodes  ) {
+      private ListNode createNodesWithData( Integer[] valuesForNodes  ) throws Exception{
 
           int lengthOfValuesToAdd = valuesForNodes.length;
+
+          if( lengthOfValuesToAdd == 0 ){
+          //return an empty list node if there are no data to add to a listnode
+              throw new Exception("There is no data to instantiate a List Node from");
+          }
 
           ListNode permanentHeadNode = new ListNode(valuesForNodes[0]);
 
