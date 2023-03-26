@@ -11,7 +11,7 @@ import java.util.ArrayList;
       int val;
       ListNode next;
 
-      ListNode tailNodeReference = this;
+//      ListNode tailNodeReference = this;
 
       /*
       * mandatory empty constructor, though I don't know how this will be of use
@@ -44,31 +44,31 @@ import java.util.ArrayList;
       }
 
 
+
     /**
      *Constructor for making copy of a ListNode,
      *
      * Ideally to be used when passing a new instance of a
      * ListNode rather than a reference of a ListNode
      */
+//
+//    ListNode( ListNode nodeToCopy ){
+//
+//        val = nodeToCopy.val;
+//
+//        if (nodeToCopy.hasNext()){
+//            next = nodeToCopy.next;
+//        }
+//    }
 
-    ListNode( ListNode nodeToCopy ){
-
-          val = nodeToCopy.val;
-
-          if (nodeToCopy.hasNext()){
-              next = nodeToCopy.next;
-          }
-      }
-
-
-      /*
+    /*
       *
       * returns a boolean value according to whether or not
       * there is a next ListNode
       * */
-      public boolean hasNext(){
-          return  ! ( next == null);
-      }
+//      public boolean hasNext(){
+//          return  ! ( next == null);
+//      }
 
 
       /*
@@ -79,24 +79,33 @@ import java.util.ArrayList;
       * in the first place a reference is passed, A value is saved not
       * a reference.
       * */
-      public void setNext(ListNode nodeToAdd){
+//      public void setNext(ListNode nodeToAdd){
+//
+//        next = new ListNode(nodeToAdd);
+//      }
 
-        next = new ListNode(nodeToAdd);
-      }
 
-      public ArrayList<Integer> getAllDataAndPutInsideArrayList(){
 
-          ArrayList<Integer> container = new ArrayList<Integer> ();
-
-          ListNode nodeInCurrentAdd = this;
-          while( nodeInCurrentAdd != null ) {
-
-              container.add(nodeInCurrentAdd.val );
-              nodeInCurrentAdd = nodeInCurrentAdd.next;
-          }
-
-          return container;
-      }
+      /*
+      *
+      * Returns an ArrayList Of Integer representing the
+      * data contained by the ListNode, from Head to Tail.
+      *
+      *
+      * */
+//      public ArrayList<Integer> getAllDataAndPutInsideArrayList(){
+//
+//          ArrayList<Integer> container = new ArrayList<Integer> ();
+//
+//          ListNode nodeInCurrentAdd = this;
+//          while( nodeInCurrentAdd != null ) {
+//
+//              container.add(nodeInCurrentAdd.val );
+//              nodeInCurrentAdd = nodeInCurrentAdd.next;
+//          }
+//
+//          return container;
+//      }
 
 
   }
@@ -181,12 +190,46 @@ import java.util.ArrayList;
           "Previous Unsorted: \nTest Node #1: " + getStringContentOfListNode(testNodeOne)
           + "\nTest Node #2: " + getStringContentOfListNode( testNodeTwo ));
 
+          Solution solutionObject = new Solution();
 
-          ListNode mergedList  = mergeKLists( toSort );
+          ListNode mergedList  = solutionObject.mergeKLists( toSort );
+
 
           System.out.println( "After Merge Sort: " + getStringContentOfListNode( mergedList ) );
 
       }
+
+      /*
+       *
+       * returns a boolean value according to whether or not
+       * there is a next ListNode
+       * */
+      public boolean hasNext( ListNode nodeToCheck ){
+          return  ! ( nodeToCheck.next == null);
+      }
+
+
+      /*
+       *
+       * Returns an ArrayList Of Integer representing the
+       * data contained by the ListNode, from Head to Tail.
+       *
+       *
+       * */
+      public ArrayList<Integer> getAllDataAndPutInsideArrayList( ListNode listNodeWithData ){
+
+          ArrayList<Integer> container = new ArrayList<Integer> ();
+
+//          ListNode nodeInCurrentAdd = listNodeWithData;
+          while( listNodeWithData != null ) {
+
+              container.add(listNodeWithData.val );
+              listNodeWithData = listNodeWithData.next;
+          }
+
+          return container;
+      }
+
 
 
       /*
@@ -219,13 +262,13 @@ import java.util.ArrayList;
       * contents properly ordered.
       *
       * */
-      public static ListNode mergeKLists(ListNode[] lists) {
+      public ListNode mergeKLists(ListNode[] lists) {
 
           ArrayList<Integer> valueOfAllNumbers = new ArrayList<Integer>();
 
           for(  ListNode nodeInside : lists ){
 
-              for( Integer dataInside: nodeInside.getAllDataAndPutInsideArrayList() )
+              for( Integer dataInside: getAllDataAndPutInsideArrayList( nodeInside ) )
               valueOfAllNumbers.add( dataInside );
           }
 
@@ -248,7 +291,7 @@ import java.util.ArrayList;
       * contains is the same data that the Passed Array Contains.
       *
       * */
-      private static ListNode createNodesWithData( Integer[] valuesForNodes  ) {
+      private ListNode createNodesWithData( Integer[] valuesForNodes  ) {
 
           int lengthOfValuesToAdd = valuesForNodes.length;
 
@@ -258,7 +301,7 @@ import java.util.ArrayList;
 
           for( int iterationCounter = 1; iterationCounter < valuesForNodes.length; iterationCounter++ ){
 
-              if( !locationFinder.hasNext() ){
+              if( !hasNext( locationFinder ) ){
 
                   locationFinder.next = new ListNode( valuesForNodes[iterationCounter] );
                   locationFinder = locationFinder.next;
@@ -269,7 +312,7 @@ import java.util.ArrayList;
       }
 
 
-      public static void  mergeSortRecursionImplementationMosh(
+      public void  mergeSortRecursionImplementationMosh(
               Integer[] inputArray
       ) {
 
@@ -307,7 +350,7 @@ import java.util.ArrayList;
 
       }
 
-      private static void arrayMerger( Integer[] inputArray, Integer[] leftArray, Integer[] rightArray ){
+      private void arrayMerger( Integer[] inputArray, Integer[] leftArray, Integer[] rightArray ){
 
           int leftSize = leftArray.length;
           int rightSize = rightArray.length;
